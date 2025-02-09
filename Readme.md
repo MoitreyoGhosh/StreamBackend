@@ -34,6 +34,6 @@ The project implements core backend features such as **authentication, video man
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-repo.git
-   cd your-repo
+   git clone https://github.com/MoitreyoGhosh/StreamBackend.git
+   cd StreamBackend
    ```
