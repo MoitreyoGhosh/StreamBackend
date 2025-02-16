@@ -16,5 +16,14 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));//Middleware to p
 app.use(express.static("public")); // Serve static files from the "public" directory such as images, CSS, and JavaScript files.
 app.use(cookieParser()); // Middleware to parse cookies from incoming requests, allowing the server to read and manage client-stored cookies.
 
+//routes import
+import userRouter from "./routes/user.routes.js"
+
+//routes declaration
+app.use("/api/v1/users", userRouter) //http://localhost:4000/api/v1/users
+
+
+
+
 
 export { app };
