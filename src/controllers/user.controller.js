@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.model.js";
@@ -177,8 +178,8 @@ const logoutUser = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(
     req.user._id,
     {
-      $set: {
-        refreshToken: undefined,
+      $unset: {
+        refreshToken: 1, //this removes the refreshToken field from the document
       },
     },
     {
@@ -394,7 +395,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
       //addFields is used to add new fields to the document
       $addFields: {
         subscribersCount: {
-          $size: $subscribers,
+          $size: "$subscribers",
         },
         channelsSubscribedToCount: {
           $size: "$subscribedTo",
