@@ -26,4 +26,43 @@ const uploadOnCloudinary = async (localfilePath) => {
   }
 };
 
-export { uploadOnCloudinary };
+const deleteFromCloudinary = async (publicId, resourceType = "image") => {
+  try {
+    if (!publicId) {
+      console.warn("No public ID provided for Cloudinary deletion.");
+      return;
+    }
+
+    let result;
+
+    if (resourceType === "video") {
+      result = await cloudinary.uploader.destroy(publicId, {
+        resource_type: "video",
+      });
+    } else {
+      result = await cloudinary.uploader.destroy(publicId); // Defaults to image
+    }
+
+    console.log(
+      "Cloudinary deletion result:",
+      result,
+      `for public ID: ${publicId}`
+    );
+
+    if (result.result !== "ok" && result.result !== "not found") {
+      console.error(
+        "Cloudinary deletion failed:",
+        result,
+        `for public ID: ${publicId}`
+      );
+    }
+  } catch (error) {
+    console.error(
+      "Error deleting from Cloudinary:",
+      error,
+      `for public ID: ${publicId}`
+    );
+  }
+};
+
+export { uploadOnCloudinary, deleteFromCloudinary };
