@@ -185,6 +185,7 @@ const getLikedVideos = asyncHandler(async (req, res) => {
       },
       {
         $unwind: "$videoDetails", // Unwind the videoDetails array
+        preserveNullAndEmptyArrays: true,
       },
       {
         $lookup: {

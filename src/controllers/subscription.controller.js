@@ -94,6 +94,7 @@ const getUserChannelSubscribers = asyncHandler(async (req, res) => {
       },
       {
         $unwind: "$subscriberInfo",
+        preserveNullAndEmptyArrays: true,
       },
       {
         $project: {
@@ -165,6 +166,7 @@ const getSubscribedChannels = asyncHandler(async (req, res) => {
       },
       {
         $unwind: "$channelInfo", // Unwind the channelInfo array
+        preserveNullAndEmptyArrays: true,
       },
       {
         $project: {
